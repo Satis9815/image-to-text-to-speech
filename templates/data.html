@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
+</head>
+<body>
+    <form action="{{url_for('getCapturedImage')}}" method="post" enctype="multipart/form-data">
+        <select class="file-upload-btn" name="lang_list">
+            {% for key,value in data.items() %}
+            <option value="{{key}}">{{value}}</option>
+            {%endfor%}
+        </select>
+        <p>choose language</p>
+        <button class="file-upload-btn " type="submit" onclick="$('.file-upload-input').trigger( 'click' )">submit</button>
+    </form>
+<div class="form-group">
+    <label class="text-center">Converted Text : </label>
+    <textarea class="form-control textl" rows="5" id="comment">{{extracted_text}}</textarea>
+</div>
+
+<div class="form-group">
+    <label for="comment">Translated Text : </label>
+    <textarea class="form-control" rows="5" id="comment">{{translated_texts}}</textarea>
+</div>
+
+{% if datamanage %}
+
+{% set aname=camaudiofile %}
+<audio controls class="btn-block">
+    <source src="{{url_for('static',filename=aname)}}" type="audio/mpeg">
+  </audio> 
+{% else %}
+<p> Please choose a file first to get the audio output </p>
+{% endif %}
+
+</body>
+</html>
